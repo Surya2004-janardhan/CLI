@@ -19,15 +19,16 @@ void reset_console_color() {
 
 void print_banner() {
     set_console_color(FOREGROUND_RED | FOREGROUND_INTENSITY);
-    printf("   ______            ______     _____ _      _____ _____ \n");
-    printf("  / ____/___  ____  / / __ \\   / ___/(_)___ / ___/|__  /\n");
-    printf(" / /   / __ \\/ __ \\/ / / / /   \\__ \\/ / __ \\\\__ \\  /_ < \n");
-    printf("/ /___/ /_/ / / / / / /_/ /   ___/ / / / / /__/ /___/ / \n");
-    printf("\\____/\\____/_/ /_/_/\\____/   /____/_/_/ /_//____//____/  \n");
-    printf("                                                         \n");
+    printf("   ____     ___     ___     _       ____     _       _____ \n");
+    printf("  / ___|   / _ \\   / _ \\   | |     / ___|   | |     |  ___|\n");
+    printf(" | |      | | | | | | | |  | |    | |       | |     | |__  \n");
+    printf(" | |      | | | | | | | |  | |    | |       | |     |  __| \n");
+    printf(" | |___   | \\_/ | | \\_/ /  | |___ | |___    | |___  | |___ \n");
+    printf("  \\____|   \\___/   \\___/   |_____| \\____|   |_____| |_____|\n");
+    printf("\n");
     reset_console_color();
     set_console_color(FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-    printf("Welcome to CoolCLI - Your Cool Command Line Interface!\n");
+    printf("Welcome to COOL CLI - Your Cool Command Line Interface!\n");
     reset_console_color();
 }
 

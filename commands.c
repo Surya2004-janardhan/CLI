@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include <time.h>
+#include <math.h>
+#include <ctype.h>
 #include "commands.h"
 #include "utils.h"
-#include <math.h>
 
 // Implementations
 
@@ -443,6 +443,11 @@ void cmd_placeholder(char **args, int arg_count) {
     printf("Command not implemented yet\n");
 }
 
+// Placeholders
+void cmd_placeholder2(char **args, int arg_count) { printf("Command not implemented yet\n"); }
+void cmd_placeholder3(char **args, int arg_count) { printf("Command not implemented yet\n"); }
+// Add more as needed to reach 100
+
 // Additional Math Implementations
 void cmd_power(char **args, int arg_count) {
     if (arg_count < 2) {
@@ -752,10 +757,81 @@ Command commands[] = {
     {"calc", cmd_calc},
     {"history", cmd_history},
     {"alias", cmd_alias},
-    // Placeholders for the rest
-    {"placeholder1", cmd_placeholder},
-    {"placeholder2", cmd_placeholder},
-    // ... up to 100+
+    // New Math
+    {"power", cmd_power},
+    {"sqrt", cmd_sqrt},
+    {"log", cmd_log},
+    {"exp", cmd_exp},
+    {"sin", cmd_sin},
+    {"cos", cmd_cos},
+    {"tan", cmd_tan},
+    {"abs", cmd_abs},
+    {"round", cmd_round},
+    {"ceil", cmd_ceil},
+    {"floor", cmd_floor},
+    {"mod", cmd_mod},
+    // New String
+    {"len", cmd_len},
+    {"substring", cmd_substring},
+    {"concat", cmd_concat},
+    {"split", cmd_split},
+    {"join", cmd_join},
+    {"trim", cmd_trim},
+    {"find", cmd_find},
+    {"rfind", cmd_rfind},
+    {"replaceall", cmd_replaceall},
+    {"isalpha", cmd_isalpha},
+    {"isdigit", cmd_isdigit},
+    // New System
+    {"date", cmd_date},
+    {"time", cmd_time},
+    {"hostname", cmd_hostname},
+    {"uptime", cmd_uptime},
+    {"disk", cmd_disk},
+    {"processes", cmd_processes},
+    {"kill", cmd_kill},
+    {"env", cmd_env},
+    {"setenv", cmd_setenv},
+    // New Fun
+    {"fortune", cmd_fortune},
+    {"cow", cmd_cow},
+    {"figlet", cmd_figlet},
+    {"game", cmd_game},
+    {"weather", cmd_weather},
+    {"quote", cmd_quote},
+    // New Network
+    {"traceroute", cmd_traceroute},
+    {"nslookup", cmd_nslookup},
+    {"wget", cmd_wget},
+    {"curl", cmd_curl},
+    {"ftp", cmd_ftp},
+    {"telnet", cmd_telnet},
+    // New Utility
+    {"echo", cmd_echo},
+    {"cat", cmd_cat},
+    {"head", cmd_head},
+    {"tail", cmd_tail},
+    {"grep", cmd_grep},
+    {"wc", cmd_wc},
+    {"sortfile", cmd_sortfile},
+    {"uniq", cmd_uniq},
+    {"diff", cmd_diff},
+    {"chmod", cmd_chmod},
+    {"pwd", cmd_pwd},
+    {"ls", cmd_ls},
+    {"cp", cmd_cp},
+    {"mv", cmd_mv},
+    {"rm", cmd_rm},
+    {"mkdir", cmd_mkdir},
+    {"rmdir", cmd_rmdir},
+    {"touch", cmd_touch},
+    {"which", cmd_which},
+    {"type", cmd_type},
+    {"findfile", cmd_findfile},
+    // Placeholders
+    {"placeholder2", cmd_placeholder2},
+    {"placeholder3", cmd_placeholder3},
+    // Add more if needed
 };
 
 int command_count = sizeof(commands) / sizeof(Command);
@@ -891,5 +967,208 @@ void cmd_telnet(char **args, int arg_count) {
     }
     char cmd[256];
     sprintf(cmd, "telnet %s %s", args[0], args[1] ? args[1] : "23");
+    system(cmd);
+}
+
+// Additional Utility Implementations
+void cmd_echo(char **args, int arg_count) {
+    for (int i = 0; i < arg_count; i++) {
+        printf("%s ", args[i]);
+    }
+    printf("\n");
+}
+
+void cmd_cat(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: cat <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "type %s", args[0]);
+    system(cmd);
+}
+
+void cmd_head(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: head <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "powershell Get-Content %s -Head 10", args[0]);
+    system(cmd);
+}
+
+void cmd_tail(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: tail <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "powershell Get-Content %s -Tail 10", args[0]);
+    system(cmd);
+}
+
+void cmd_grep(char **args, int arg_count) {
+    if (arg_count < 2) {
+        printf("Usage: grep <pattern> <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "findstr %s %s", args[0], args[1]);
+    system(cmd);
+}
+
+void cmd_wc(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: wc <file>\n");
+        return;
+    }
+    // Simple wc
+    FILE *f = fopen(args[0], "r");
+    if (!f) {
+        printf("File not found\n");
+        return;
+    }
+    int lines = 0, words = 0, chars = 0;
+    char ch;
+    while ((ch = fgetc(f)) != EOF) {
+        chars++;
+        if (ch == '\n') lines++;
+        if (ch == ' ' || ch == '\n') words++;
+    }
+    printf("Lines: %d, Words: %d, Chars: %d\n", lines, words, chars);
+    fclose(f);
+}
+
+void cmd_sortfile(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: sortfile <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "sort %s", args[0]);
+    system(cmd);
+}
+
+void cmd_uniq(char **args, int arg_count) {
+    printf("Uniq: Not implemented\n");
+}
+
+void cmd_diff(char **args, int arg_count) {
+    if (arg_count < 2) {
+        printf("Usage: diff <file1> <file2>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "fc %s %s", args[0], args[1]);
+    system(cmd);
+}
+
+void cmd_chmod(char **args, int arg_count) {
+    printf("Chmod: Windows attrib instead\n");
+    if (arg_count < 2) {
+        printf("Usage: chmod <attr> <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "attrib %s %s", args[0], args[1]);
+    system(cmd);
+}
+
+void cmd_pwd(char **args, int arg_count) {
+    system("cd");
+}
+
+void cmd_ls(char **args, int arg_count) {
+    system("dir");
+}
+
+void cmd_cp(char **args, int arg_count) {
+    if (arg_count < 2) {
+        printf("Usage: cp <src> <dst>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "copy %s %s", args[0], args[1]);
+    system(cmd);
+}
+
+void cmd_mv(char **args, int arg_count) {
+    if (arg_count < 2) {
+        printf("Usage: mv <src> <dst>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "move %s %s", args[0], args[1]);
+    system(cmd);
+}
+
+void cmd_rm(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: rm <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "del %s", args[0]);
+    system(cmd);
+}
+
+void cmd_mkdir(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: mkdir <dir>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "mkdir %s", args[0]);
+    system(cmd);
+}
+
+void cmd_rmdir(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: rmdir <dir>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "rmdir %s", args[0]);
+    system(cmd);
+}
+
+void cmd_touch(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: touch <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "echo. > %s", args[0]);
+    system(cmd);
+}
+
+void cmd_which(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: which <cmd>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "where %s", args[0]);
+    system(cmd);
+}
+
+void cmd_type(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: type <file>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "type %s", args[0]);
+    system(cmd);
+}
+
+void cmd_findfile(char **args, int arg_count) {
+    if (arg_count < 1) {
+        printf("Usage: findfile <pattern>\n");
+        return;
+    }
+    char cmd[256];
+    sprintf(cmd, "dir /s /b %s", args[0]);
     system(cmd);
 }

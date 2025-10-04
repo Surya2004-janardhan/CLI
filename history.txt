@@ -2,3 +2,13 @@ help
 exit
 add 5 3
 exit
+power 2 3
+exit
+cp main.c test.c
+exit
+exit
+exit
+exit
+exit
+exit
+exit
