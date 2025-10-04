@@ -1,0 +1,4 @@
+help
+exit
+add 5 3
+exit
